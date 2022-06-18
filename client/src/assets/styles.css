@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*.router-link-active and router-link-exact-active are automatic vuejs class*/
+.router-link-active {
+    @apply bg-gray-900 text-white;
+}
+
+.nav-link {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
+}
+
+.form-container {
+    @apply min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8;
+}
+
+.head-container {
+    @apply sm:mx-auto sm:w-full sm:max-w-md;
+}
+
+.input-label {
+    @apply inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm min-w-111;
+}
+
+.input-field {
+    @apply flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300;
+}
+
+.input-frame {
+    @apply max-w-lg flex rounded-md shadow-sm;
+}
+.button-container {
+    @apply flex justify-between;
+}
+
+.button-submit {
+    @apply py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-1/3;
+}
+.button-reset {
+    @apply py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 w-1/3;
+}
+
+.logo-image {
+    @apply mx-auto;
+}
+
+.page-title {
+    @apply mt-6 text-center text-3xl font-extrabold text-gray-900;
+}
+.page-subtitle {
+    @apply mt-2 text-center text-sm text-gray-600;
+}
+
