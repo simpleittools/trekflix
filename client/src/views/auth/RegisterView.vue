@@ -31,8 +31,10 @@
 </template>
 
 <script>
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {Form, Field, ErrorMessage} from 'vee-validate'
+import axios from "axios";
+import {useRouter} from 'vue-router'
 import BaseInput from "@/components/formComponents/BaseInput";
 import FirstNameComponent from "@/components/formComponents/FirstNameComponent";
 import LastNameComponent from "@/components/formComponents/LastNameComponent";
@@ -56,6 +58,8 @@ export default {
   },
   props:['firstName'],
   setup() {
+    const registerError = ref(false)
+    const router = useRouter();
 
     const data = reactive({
       firstName: '',
@@ -68,15 +72,25 @@ export default {
     })
 
 
-    const handleSubmit = () => {
-      data.firstName
-      data.lastName
-      data.username
-      data.email
-      data.email2
-      data.password
-      data.password2
-      console.log(data)
+    const handleSubmit = async () => {
+      try {
+        await axios.post('auth/register', {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          username: data.username,
+          email: data.email,
+          password: data.password,
+          password_confirm: data.password2,
+        });
+        await router.push({name: 'login'})
+      } catch(err) {
+        if (err.response.status == 400) {
+          registerError.value = true
+
+        }
+        console.log(err)
+      }
+
     }
     const handleClear = () => {
       data.firstName = ''

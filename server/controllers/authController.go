@@ -89,7 +89,7 @@ func Login(c *fiber.Ctx) error {
 	}
 	// Create Cookie
 	cookie := fiber.Cookie{
-		Name:     "trekflix",
+		Name:     "jwt",
 		Value:    token,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
@@ -98,13 +98,13 @@ func Login(c *fiber.Ctx) error {
 	c.Cookie(&cookie)
 
 	return c.JSON(fiber.Map{
-		"trekflix": token,
+		"jwt": token,
 	})
 
 }
 
 func User(c *fiber.Ctx) error {
-	cookie := c.Cookies("trekflix")
+	cookie := c.Cookies("jwt")
 
 	//	parse the token
 	token, err := jwt.ParseWithClaims(cookie, &Claims{}, func(token *jwt.Token) (interface{}, error) {
@@ -130,7 +130,7 @@ func User(c *fiber.Ctx) error {
 
 func Logout(c *fiber.Ctx) error {
 	cookie := fiber.Cookie{
-		Name:     "trekflix",
+		Name:     "jwt",
 		Value:    "",
 		Expires:  time.Now().Add(-time.Hour),
 		HTTPOnly: true,

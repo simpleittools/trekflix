@@ -24,9 +24,12 @@
 
 <script>
 import {reactive} from "vue";
+import {useRouter} from "vue-router";
 import {Form} from 'vee-validate'
 import UsernameComponent from "@/components/formComponents/UsernameComponent";
 import PasswordFormComponent from "@/components/formComponents/PasswordFormComponent";
+import axios from "axios";
+import {ref} from "vue";
 
 export default {
   name: "LoginView",
@@ -36,16 +39,27 @@ export default {
     PasswordFormComponent,
   },
   setup() {
+    const router = useRouter()
+    const loginError = ref(false)
     const data = reactive({
       username: '',
       password: '',
     })
 
-    const handleSubmit = () => {
-      data.username
-      data.password
+    const handleSubmit = async () => {
+      try {
+        await axios.post('auth/login', {
+          username: data.username,
+          password: data.password,
+        });
+        await router.push({name: 'home'})
+      } catch(err) {
+        if (err.response.status == 400) {
+          loginError.value = true
 
-      console.log(data)
+        }
+        console.log(err)
+      }
     }
     const handleClear = () => {
       data.username = ''
@@ -55,6 +69,7 @@ export default {
 
     return {
       data,
+      loginError,
       handleSubmit,
       handleClear
     }
