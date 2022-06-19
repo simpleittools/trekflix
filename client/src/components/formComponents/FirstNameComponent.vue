@@ -3,13 +3,13 @@
     <div class="input-frame">
       <span class="input-label"> First Name </span>
       <VeeField type="text" :value="modelValue"
-             @input="$emit('update:modelValue', $event.target.value)"
-             name="firstName" :rules="(value) => {
-               if(value && value.trim()) return true
-               return 'A First Name is Required'
-             }"
-
-             autocomplete="firstName" class="input-field"
+                v-bind="$attrs"
+                @input="$emit('update:modelValue', $event.target.value)"
+                name="firstName" :rules="(value) => {
+                  if(value && value.trim()) return true
+                  return 'A First Name is Required'
+                }"
+                autocomplete="firstName" class="input-field"
       />
     </div>
     <VeeErrorMessage name="firstName" class="form-error"/>

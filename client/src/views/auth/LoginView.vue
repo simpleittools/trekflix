@@ -9,7 +9,8 @@
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <VeeForm class="space-y-6" @submit="handleSubmit">
-          <UsernameComponent v-model="data.username"/>
+          <p v-if="loginError">Username or password failed.</p>
+          <UsernameComponent v-model="data.username" :class="{'error-flag': loginError}"/>
           <PasswordFormComponent v-model="data.password" />
 
           <div class="button-container">
@@ -54,7 +55,7 @@ export default {
         });
         await router.push({name: 'home'})
       } catch(err) {
-        if (err.response.status == 400) {
+        if (err.response) {
           loginError.value = true
 
         }

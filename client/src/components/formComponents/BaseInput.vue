@@ -1,5 +1,5 @@
 <template>
-
+<!--#input=$emit is used to pass the data from the child to the parent-->
       <span class="input-label"> {{label}} </span>
       <input type="text"
              :value="modelValue"
