@@ -11,54 +11,19 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-        <form class="space-y-6" @submit.prevent="handleSubmit">
-          <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <div class="input-frame">
-              <span class="input-label"> First Name </span>
-              <input type="text" v-model="data.firstName" id="firstName" autocomplete="firstName" class="input-field" />
-            </div>
-          </div>
-          <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <div class="input-frame">
-              <span class="input-label"> Last Name </span>
-              <input type="text" v-model="data.lastName" id="lastName" autocomplete="lastName" class="input-field" />
-            </div>
-          </div>
-          <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <div class="input-frame">
-              <span class="input-label"> Username </span>
-              <input type="text" v-model="data.username" id="username" autocomplete="username" class="input-field" />
-            </div>
-          </div>
-          <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <div class="input-frame">
-              <span class="input-label"> Email </span>
-              <input type="text" v-model="data.email" id="email" autocomplete="email" class="input-field" />
-            </div>
-          </div>
-          <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <div class="input-frame">
-              <span class="input-label"> Confirm Email </span>
-              <input type="text" v-model="data.email2" id="email2" autocomplete="email2" class="input-field" />
-            </div>
-          </div>
-          <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <div class="input-frame">
-              <span class="input-label"> Password </span>
-              <input type="password" v-model="data.password" id="password" autocomplete="password" class="input-field" />
-            </div>
-          </div>
-          <div class="mt-1 sm:mt-0 sm:col-span-2">
-            <div class="input-frame">
-              <span class="input-label"> Verify Password </span>
-              <input type="password" v-model="data.password2" id="password2" autocomplete="password2" class="input-field" />
-            </div>
-          </div>
+        <VeeForm class="space-y-6" @submit="handleSubmit">
+          <FirstNameComponent v-model="data.firstName" />
+          <LastNameComponent v-model="data.lastName" />
+          <UsernameComponent v-model="data.username" />
+          <EmailFormComponent v-model="data.email" />
+          <PasswordFormComponent v-model="data.password" />
+          <PasswordValidateFormComponent v-model="data.password2" />
+
           <div class="button-container">
             <button type="submit" class="button-submit">Submit</button>
             <button type="reset" class="button-reset" @click.prevent="handleClear">Clear</button>
           </div>
-        </form>
+        </VeeForm>
       </div>
     </div>
   </div>
@@ -67,9 +32,31 @@
 
 <script>
 import {reactive} from "vue";
+import {Form, Field, ErrorMessage} from 'vee-validate'
+import BaseInput from "@/components/formComponents/BaseInput";
+import FirstNameComponent from "@/components/formComponents/FirstNameComponent";
+import LastNameComponent from "@/components/formComponents/LastNameComponent";
+import UsernameComponent from "@/components/formComponents/UsernameComponent";
+import EmailFormComponent from "@/components/formComponents/EmailFormComponent";
+import PasswordFormComponent from "@/components/formComponents/PasswordFormComponent";
+import PasswordValidateFormComponent from "@/components/formComponents/PasswordValidateFormComponent";
 export default {
   name: "RegisterView",
+  components: {
+    VeeForm: Form,
+    VeeField: Field,
+    VeeErrorMessage: ErrorMessage,
+    BaseInput,
+    FirstNameComponent,
+    LastNameComponent,
+    UsernameComponent,
+    EmailFormComponent,
+    PasswordFormComponent,
+    PasswordValidateFormComponent,
+  },
+  props:['firstName'],
   setup() {
+
     const data = reactive({
       firstName: '',
       lastName: '',
@@ -80,6 +67,7 @@ export default {
       password2: '',
     })
 
+
     const handleSubmit = () => {
       data.firstName
       data.lastName
@@ -88,7 +76,6 @@ export default {
       data.email2
       data.password
       data.password2
-
       console.log(data)
     }
     const handleClear = () => {
@@ -98,10 +85,12 @@ export default {
       data.email = ''
       data.email2 = ''
       data.password = ''
-      data.password2 = ''
 
+      data.password2 = ''
       console.log(data)
+
     }
+
     return {
       data,
       handleSubmit,

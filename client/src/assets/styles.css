@@ -52,3 +52,7 @@
     @apply mt-2 text-center text-sm text-gray-600;
 }
 
+.form-error {
+    @apply text-sm text-red-700
+}
+
