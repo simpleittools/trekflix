@@ -3,13 +3,13 @@
     <div class="input-frame">
       <span class="input-label"> Username </span>
       <VeeField type="text" :value="modelValue"
-             @input="$emit('update:modelValue', $event.target.value)"
-             name="username" :rules="(value) => {
-               if(value && value.trim()) return true
-               return 'The Username Field is Required'
-             }"
-
-             autocomplete="username" class="input-field"
+                v-bind="$attrs"
+                @input="$emit('update:modelValue', $event.target.value)"
+                name="username" :rules="(value) => {
+                  if(value && value.trim()) return true
+                  return 'The Username Field is Required'
+                }"
+                autocomplete="username" class="input-field"
       />
     </div>
     <VeeErrorMessage name="username" class="form-error"/>
@@ -20,6 +20,7 @@
 import {ErrorMessage, Field} from "vee-validate";
 
 export default{
+  inheritAttrs: false,
   components: {
     VeeField: Field,
     VeeErrorMessage: ErrorMessage,

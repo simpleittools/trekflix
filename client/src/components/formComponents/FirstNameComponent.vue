@@ -3,8 +3,8 @@
     <div class="input-frame">
       <span class="input-label"> First Name </span>
       <VeeField type="text" :value="modelValue"
-                v-bind="$attrs"
                 @input="$emit('update:modelValue', $event.target.value)"
+                v-bind="$attrs"
                 name="firstName" :rules="(value) => {
                   if(value && value.trim()) return true
                   return 'A First Name is Required'
@@ -20,11 +20,12 @@
 import {ErrorMessage, Field} from "vee-validate";
 
 export default{
+  inheritAttrs: false,
   components: {
     VeeField: Field,
     VeeErrorMessage: ErrorMessage,
-
   },
+
   }
 </script>
 

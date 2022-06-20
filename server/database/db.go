@@ -24,5 +24,5 @@ func Conn() {
 
 	DB = conn
 
-	conn.AutoMigrate(&models.User{})
+	conn.AutoMigrate(&models.User{}, &models.PasswordReset{})
 }

@@ -7,7 +7,11 @@
              v-bind="$attrs"
              class="input-field"/>
 </template>
+<script>
+export default{
 
+}
+</script>
 <script setup>
   defineProps({
     label: {

@@ -37,9 +37,11 @@ export default {
   components: {
     VeeForm: Form,
     UsernameComponent,
-    PasswordFormComponent,
-  },
-  setup() {
+    PasswordFormComponent
+  }
+}
+</script>
+<script setup>
     const router = useRouter()
     const loginError = ref(false)
     const data = reactive({
@@ -68,14 +70,7 @@ export default {
       console.log(data)
     }
 
-    return {
-      data,
-      loginError,
-      handleSubmit,
-      handleClear
-    }
-  }
-}
+
 </script>
 
 <style scoped>
